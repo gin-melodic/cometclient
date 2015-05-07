@@ -4,6 +4,7 @@
 #import "DDCometMessage.h"
 #import "DDQueue.h"
 #import <objc/runtime.h>
+
 #define kDefaultConnectionTimeout 60.0
 #define kConnectionTimeoutVariance 5
 #define kMinPollTime 0.020  // The minimum time between polls in seconds
@@ -69,7 +70,7 @@ static void * const statusKey = (void*)&statusKey;
 					DDCometMessage *message = [DDCometMessage messageWithChannel:@"/meta/connect"];
 					message.clientID = _cometClient.clientID;
 					message.connectionType = @"long-polling";
-					NSLog(@"Sending long-poll message: %@", message);
+					DDLog(@"Sending long-poll message: %@", message);
 					messages = @[message];
                     _lastPoll = [NSDate date];
 				}
@@ -145,7 +146,7 @@ static void * const statusKey = (void*)&statusKey;
     }
     NSData *body = [NSJSONSerialization dataWithJSONObject:msgArr options:NSJSONWritingPrettyPrinted error:&error];
 
-    NSLog(@"Sending Comet message:\n%@", [[NSString alloc] initWithBytes:body.bytes length:body.length encoding:NSUTF8StringEncoding]);
+    DDLog(@"Sending Comet message:\n%@", [[NSString alloc] initWithBytes:body.bytes length:body.length encoding:NSUTF8StringEncoding]);
 	
 	[request setHTTPMethod:@"POST"];
 	[request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];

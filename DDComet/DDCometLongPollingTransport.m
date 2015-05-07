@@ -65,7 +65,7 @@ static void * const timestampKey = (void*)&timestampKey;
 					DDCometMessage *message = [DDCometMessage messageWithChannel:@"/meta/connect"];
 					message.clientID = m_client.clientID;
 					message.connectionType = @"long-polling";
-					NSLog(@"Sending long-poll message: %@", message);
+					DDLog(@"Sending long-poll message: %@", message);
 					messages = @[message];
                     _lastPoll = [NSDate date];
 				}
@@ -141,7 +141,7 @@ static void * const timestampKey = (void*)&timestampKey;
     }
     NSData *body = [NSJSONSerialization dataWithJSONObject:msgArr options:NSJSONWritingPrettyPrinted error:&error];
 
-    NSLog(@"Sending Comet message:\n%@", [[NSString alloc] initWithBytes:body.bytes length:body.length encoding:NSUTF8StringEncoding]);
+    DDLog(@"Sending Comet message:\n%@", [[NSString alloc] initWithBytes:body.bytes length:body.length encoding:NSUTF8StringEncoding]);
 	
 	[request setHTTPMethod:@"POST"];
 	[request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];

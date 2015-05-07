@@ -1,6 +1,6 @@
 
 #import <Foundation/Foundation.h>
-
+#import "DDLog.h"
 
 @class DDCometAFLongPollingTransport;
 @class DDCometMessage;
@@ -72,6 +72,9 @@ typedef enum
                    successBlock:(void(^)(DDCometClient*,id,NSString*))successBlock
                      errorBlock:(void(^)(DDCometClient*,id,NSString*,NSError*))errorBlock;
 - (void) unsubscribeAll;
+
+//Added by gin 2015-05-06 日志相关操作
+@property (nonatomic, assign) BOOL debugMode;
 
 @end
 
