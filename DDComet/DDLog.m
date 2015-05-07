@@ -15,8 +15,11 @@ void setLogSwitch(int isLog) {
 }
 
 void DDLog(NSString *format, ...) {
+  if (LogSwitch == 0) {
+    return;
+  }
   //如果format为nil
-  if (!format && LogSwitch == 1) {
+  if (!format) {
     va_list args;
     va_start(args, format);
     //只取第一个参数
