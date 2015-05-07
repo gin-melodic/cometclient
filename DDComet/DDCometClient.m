@@ -518,7 +518,7 @@ static void * const delegateKey = (void*)&delegateKey;
 	message.clientID = m_clientID;
 	if (!message.ID)
 		message.ID = [self nextMessageID];
-	NSLog(@"Sending message: %@", message);
+	DDLog(@"Sending message: %@", message);
 	[m_outgoingQueue addObject:message];
 	
 	if (m_transport == nil && m_endpointURL != nil)
@@ -530,7 +530,7 @@ static void * const delegateKey = (void*)&delegateKey;
 
 - (void)handleMessage:(DDCometMessage *)message
 {    
-	NSLog(@"Message received: %@", message);
+	DDLog(@"Message received: %@", message);
 	NSString *channel = message.channel;
     
 	if ([channel hasPrefix:@"/meta/"])
@@ -651,7 +651,7 @@ static void * const delegateKey = (void*)&delegateKey;
 		}
 		else
 		{
-			NSLog(@"Unhandled meta message");
+			DDLog(@"Unhandled meta message");
 		}
 	}
 	else
@@ -803,4 +803,16 @@ static void * const delegateKey = (void*)&delegateKey;
 {
     return objc_getAssociatedObject(message, delegateKey);
 }
+
+#pragma mark - 日志相关
+- (void)setDebugMode:(BOOL)debugMode {
+  _debugMode = debugMode;
+  if (debugMode) {
+    setLogSwitch(1);
+  }
+  else {
+    setLogSwitch(0);
+  }
+}
+
 @end
