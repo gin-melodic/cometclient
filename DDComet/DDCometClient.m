@@ -680,7 +680,11 @@ static void * const delegateKey = (void*)&delegateKey;
 			}
             if ([subscription.target respondsToSelector:subscription.selector]) 
 			{
-                objc_msgSend(subscription.target, subscription.selector, message);
+        //Fix bug in arm64
+        //@see https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/ConvertingYourAppto64-Bit/ConvertingYourAppto64-Bit.html "Dispatch Objective-C Messages Using the Method Function’s Prototype"
+        id (*response)(id, SEL, id) = (id (*)(id, SEL, id)) objc_msgSend;
+        response(subscription.target, subscription.selector, message);
+//                objc_msgSend(subscription.target, subscription.selector, message);
             }
 //			[subscription.target performSelector:subscription.selector withObject:message];
         }
