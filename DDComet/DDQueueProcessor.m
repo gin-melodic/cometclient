@@ -61,8 +61,10 @@ void DDQueueProcessorPerform(void *info);
 
 - (void)makeTargetPeformSelector
 {
-    objc_msgSend(m_target, m_selector);
-//	[m_target performSelector:m_selector];
+  if (!m_target) return;
+  @synchronized(self) {
+    ((void (*)(id, SEL))[m_target methodForSelector:m_selector])(m_target, m_selector);
+  }
 }
 
 @end

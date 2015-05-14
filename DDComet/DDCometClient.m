@@ -678,16 +678,17 @@ static void * const delegateKey = (void*)&delegateKey;
 				//This means the target of the subscription call has been released and cannot receive any message so we should unsubscribe
 				[self unsubscribeWithSubscription:subscription];
 			}
-            if ([subscription.target respondsToSelector:subscription.selector]) 
+      if ([subscription.target respondsToSelector:subscription.selector])
 			{
-        //Fix bug in arm64
-        //@see https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/ConvertingYourAppto64-Bit/ConvertingYourAppto64-Bit.html "Dispatch Objective-C Messages Using the Method Function’s Prototype"
-        id (*response)(id, SEL, id) = (id (*)(id, SEL, id)) objc_msgSend;
-        response(subscription.target, subscription.selector, message);
-//                objc_msgSend(subscription.target, subscription.selector, message);
-            }
-//			[subscription.target performSelector:subscription.selector withObject:message];
+        //Fix bug in ARC
+        if (!subscription.target) {
+          return;
         }
+        IMP imp = [subscription.target methodForSelector:subscription.selector];
+        void (*func)(id, SEL, id) = (void *)imp;
+        func(subscription.target, subscription.selector, message);
+      }
+    }
 	}
 }
 
