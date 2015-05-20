@@ -60,7 +60,7 @@ static void * const statusKey = (void*)&statusKey;
 		@autoreleasepool {
 			NSArray *messages = [self outgoingMessages];
 			
-			BOOL isPolling;
+			BOOL isPolling = NO;
 			if ([messages count] == 0)
 			{
 				if (_cometClient.state == DDCometStateConnected && !_polling && (!_lastPoll || fabs([_lastPoll timeIntervalSinceNow]) > kMinPollTime))

@@ -55,7 +55,7 @@ static void * const timestampKey = (void*)&timestampKey;
 		@autoreleasepool {
 			NSArray *messages = [self outgoingMessages];
 			
-			BOOL isPolling;
+			BOOL isPolling = NO;
 			if ([messages count] == 0)
 			{
 				if (m_client.state == DDCometStateConnected && !_polling && (!_lastPoll || fabs([_lastPoll timeIntervalSinceNow]) > kMinPollTime))
