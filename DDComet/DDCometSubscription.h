@@ -1,11 +1,11 @@
 
 #import <Foundation/Foundation.h>
-#import "DDCometClient.h"
 
+@protocol DDCometClientSubscriptionDelegate;
 
 @interface DDCometSubscription : NSObject
 
-@property (nonatomic, readonly) NSString *channel;
+@property (nonatomic, copy, readonly) NSString *channel;
 @property (weak, nonatomic, readonly) id target;
 @property (nonatomic, readonly) SEL selector;
 @property (weak, nonatomic, readonly) id<DDCometClientSubscriptionDelegate> delegate;

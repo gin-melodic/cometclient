@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0620"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "46568FBB132C01AD004086EE"
-               BuildableName = "CometClientTests.octest"
+               BuildableName = "CometClientTests.xctest"
                BlueprintName = "CometClientTests"
                ReferencedContainer = "container:CometClient.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "46568FBB132C01AD004086EE"
-               BuildableName = "CometClientTests.octest"
+               BuildableName = "CometClientTests.xctest"
                BlueprintName = "CometClientTests"
                ReferencedContainer = "container:CometClient.xcodeproj">
             </BuildableReference>

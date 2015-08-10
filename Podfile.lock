@@ -1,13 +1,13 @@
 PODS:
-  - AFNetworking (1.3.4)
-  - SBJson (4.0.1)
+  - Reachability (3.2)
+  - SocketRocket (0.3.1-beta2)
 
 DEPENDENCIES:
-  - AFNetworking (~> 1.3.3)
-  - SBJson (~> 4.0.0)
+  - Reachability
+  - SocketRocket (~> 0.3.1-beta2)
 
 SPEC CHECKSUMS:
-  AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
-  SBJson: 68f16f446bd6047dc3dd1ec4919a468c2cd7fedd
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SocketRocket: 7284ab9370a06c99aba92b2fe3a32aedd0f9a6fa
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.3

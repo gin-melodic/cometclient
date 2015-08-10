@@ -15,6 +15,9 @@ New Features:
 2. Additional delegates on success/failure of subscriptions and message publication
 3. Added support for block callbacks on success/failure of subscriptions and message publication
 4. Persistent subscriptions
+5. Updated 
+5. Replace NSURLConnection with NSURLSession
+6  Added WebSocket support through SocketRocket.
    
    Previously when a client timeout occured (i.e. when it had been more than x seconds between queries where x is defined as the CometD timeout on the server), all subscription information was lost.  For mobile devices where momentary disconnections are not uncommon, this was extremely problematic.
    

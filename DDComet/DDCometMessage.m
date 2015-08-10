@@ -56,29 +56,13 @@ static __strong NSDateFormatter* FMT;
 - (NSString *)bayeuxFormat
 {
 	NSString *args = @"";
-	NSArray *components = @[[NSString stringWithFormat:@"%d", [self code]], args, [self localizedDescription]];
+	NSArray *components = @[[NSString stringWithFormat:@"%ld", (long)[self code]], args, [self localizedDescription]];
 	return [components componentsJoinedByString:@":"];
 }
 
 @end
 
 @implementation DDCometMessage
-
-@synthesize channel = m_channel,
-	version = m_version,
-	minimumVersion = m_minimumVersion,
-	supportedConnectionTypes = m_supportedConnectionTypes,
-	clientID = m_clientID,
-	advice = m_advice,
-	connectionType = m_connectionType,
-	ID = m_ID,
-	timestamp = m_timestamp,
-	data = m_data,
-	successful = m_successful,
-	subscription = m_subscription,
-	error = m_error,
-	ext = m_ext;
-
 
 + (DDCometMessage *)messageWithChannel:(NSString *)channel
 {
@@ -133,39 +117,42 @@ static __strong NSDateFormatter* FMT;
 - (NSDictionary *)proxyForJson
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	if (m_channel)
-		dict[@"channel"] = m_channel;
-	if (m_version)
-		dict[@"version"] = m_version;
-	if (m_minimumVersion)
-		dict[@"minimumVersion"] = m_minimumVersion;
-	if (m_supportedConnectionTypes)
-		dict[@"supportedConnectionTypes"] = m_supportedConnectionTypes;
-	if (m_clientID)
-		dict[@"clientId"] = m_clientID;
-	if (m_advice)
-		dict[@"advice"] = m_advice;
-	if (m_connectionType)
-		dict[@"connectionType"] = m_connectionType;
-	if (m_ID)
-		dict[@"id"] = m_ID;
-	if (m_timestamp)
-		dict[@"timestamp"] = [m_timestamp ISO8601Representation];
-	if (m_data) {
-        if ([m_data respondsToSelector:@selector(asDictionary)]) {
-            dict[@"data"] = [m_data performSelector:@selector(asDictionary)];
+	if (_channel)
+		dict[@"channel"] = _channel;
+	if (_version)
+		dict[@"version"] = _version;
+	if (_minimumVersion)
+		dict[@"minimumVersion"] = _minimumVersion;
+	if (_supportedConnectionTypes)
+		dict[@"supportedConnectionTypes"] = _supportedConnectionTypes;
+	if (_clientID)
+		dict[@"clientId"] = _clientID;
+	if (_advice)
+		dict[@"advice"] = _advice;
+	if (_connectionType)
+		dict[@"connectionType"] = _connectionType;
+	if (_ID)
+		dict[@"id"] = _ID;
+	if (_timestamp)
+		dict[@"timestamp"] = [_timestamp ISO8601Representation];
+	if (_data) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+        if ([_data respondsToSelector:@selector(asDictionary)]) {
+            dict[@"data"] = [_data performSelector:@selector(asDictionary)];
+#pragma clang diagnostic pop
         } else {
-            dict[@"data"] = m_data;
+            dict[@"data"] = _data;
         }
     }
-	if (m_successful)
-		dict[@"successful"] = m_successful;
-	if (m_subscription)
-		dict[@"subscription"] = m_subscription;
-	if (m_error)
-		dict[@"error"] = [m_error bayeuxFormat];
-	if (m_ext)
-		dict[@"ext"] = m_ext;
+	if (_successful)
+		dict[@"successful"] = _successful;
+	if (_subscription)
+		dict[@"subscription"] = _subscription;
+	if (_error)
+		dict[@"error"] = [_error bayeuxFormat];
+	if (_ext)
+		dict[@"ext"] = _ext;
 	return dict;
 }
 

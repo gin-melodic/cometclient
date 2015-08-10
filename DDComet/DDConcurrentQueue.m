@@ -7,8 +7,8 @@
 @interface DDConcurrentQueueNode : NSObject
 {
 @private
-    id __strong m_object;
-	DDConcurrentQueueNode * volatile __strong m_next;
+    id __strong _object;
+	DDConcurrentQueueNode * volatile __strong _next;
 }
 
 @property (nonatomic, strong) id object;
@@ -20,27 +20,30 @@
 
 @implementation DDConcurrentQueueNode
 
-@synthesize object = m_object, next = m_next;
-
 - (id)initWithObject:(id)object
 {
 	if ((self = [super init]))
 	{
-		m_object = object;
-        m_next = nil;
+		_object = object;
+        _next = nil;
 	}
 	return self;
 }
 
 - (BOOL)compareNext:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new
 {
-	return OSAtomicCompareAndSwapPtrBarrier((__bridge void *)(old), (__bridge void *)(new), (void * volatile)&m_next);
+	return OSAtomicCompareAndSwapPtrBarrier((__bridge void *)(old), (__bridge void *)(new), (void * volatile)&_next);
 }
 
 @end
 
 @interface DDConcurrentQueue ()
-
+{
+@private
+    DDConcurrentQueueNode * volatile _head;
+    DDConcurrentQueueNode * volatile _tail;
+    id<DDQueueDelegate> _delegate;
+}
 - (BOOL)compareHead:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new;
 - (BOOL)compareTail:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new;
 
@@ -54,8 +57,8 @@
 	{
 		DDConcurrentQueueNode *node = [[DDConcurrentQueueNode alloc] init];
         //CFRetain((__bridge CFTypeRef)node);
-		m_head = node;
-		m_tail = node;
+		_head = node;
+		_tail = node;
 	}
 	return self;
 }
@@ -66,9 +69,9 @@
     CFRetain((__bridge CFTypeRef)node);
 	while (YES)
 	{
-		DDConcurrentQueueNode *tail = m_tail;
+		DDConcurrentQueueNode *tail = _tail;
 		DDConcurrentQueueNode *next = tail.next;
-		if (tail == m_tail)
+		if (tail == _tail)
 		{
 			if (next == nil)
 			{
@@ -84,18 +87,18 @@
 			}
 		}
 	}
-	if (m_delegate)
-		[m_delegate queueDidAddObject:self];
+	if (_delegate)
+		[_delegate queueDidAddObject:self];
 }
 
 - (id)removeObject
 {
 	while (YES)
 	{
-		DDConcurrentQueueNode *head = (DDConcurrentQueueNode*)m_head;
-		DDConcurrentQueueNode *tail = (DDConcurrentQueueNode*)m_tail;
+		DDConcurrentQueueNode *head = (DDConcurrentQueueNode*)_head;
+		DDConcurrentQueueNode *tail = (DDConcurrentQueueNode*)_tail;
 		DDConcurrentQueueNode *first = head.next;
-		if (head == m_head)
+		if (head == _head)
 		{
 			if (head == tail)
 			{
@@ -121,17 +124,17 @@
 
 - (void)setDelegate:(id<DDQueueDelegate>)delegate
 {
-	m_delegate = delegate;
+	_delegate = delegate;
 }
 
 - (BOOL)compareHead:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new
 {
-	return OSAtomicCompareAndSwapPtrBarrier((__bridge void *)old, (__bridge void *)new, (volatile void *) &m_head);
+	return OSAtomicCompareAndSwapPtrBarrier((__bridge void *)old, (__bridge void *)new, (volatile void *) &_head);
 }
 
 - (BOOL)compareTail:(DDConcurrentQueueNode *)old andSet:(DDConcurrentQueueNode *)new
 {
-	return OSAtomicCompareAndSwapPtrBarrier((__bridge void *)old, (__bridge void *)new, (volatile void *)&m_tail);
+	return OSAtomicCompareAndSwapPtrBarrier((__bridge void *)old, (__bridge void *)new, (volatile void *)&_tail);
 }
 
 @end

@@ -1,6 +1,6 @@
 
 #import "DDCometSubscription.h"
-
+#import "DDCometClient.h"
 
 @implementation DDCometSubscription
 
@@ -93,7 +93,7 @@
 
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"%@-%d", self.channel, self.hash];
+    return [NSString stringWithFormat:@"%@-%lu", self.channel, (unsigned long)self.hash];
 }
 
 @end
