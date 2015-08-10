@@ -35,7 +35,6 @@
 		7A1BD8EC1ACC311F00FDF0BD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A1BD8E91ACC311F00FDF0BD /* LaunchScreen.xib */; };
 		7A83825E1B3CA02600F9FCE4 /* DDCometWebSocketTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A83825D1B3CA02600F9FCE4 /* DDCometWebSocketTransport.m */; };
 		7AFD43281B2F660100A27BFA /* DDCometURLSessionLongPollingTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD43271B2F660100A27BFA /* DDCometURLSessionLongPollingTransport.m */; };
-		A382EE6B1AFB489E00A13202 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A382EE6A1AFB489E00A13202 /* DDLog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,8 +92,6 @@
 		7A83825D1B3CA02600F9FCE4 /* DDCometWebSocketTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCometWebSocketTransport.m; sourceTree = "<group>"; };
 		7A9B188C1B597B1400CE6266 /* DDCometClientInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDCometClientInternal.h; sourceTree = "<group>"; };
 		7AFD43271B2F660100A27BFA /* DDCometURLSessionLongPollingTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCometURLSessionLongPollingTransport.m; sourceTree = "<group>"; };
-		A382EE691AFB489E00A13202 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = DDComet/DDLog.h; sourceTree = "<group>"; };
-		A382EE6A1AFB489E00A13202 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = DDComet/DDLog.m; sourceTree = "<group>"; };
 		F7F43782D4E158B3F04D290A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,8 +221,6 @@
 				46569008132DA5FE004086EE /* DDCometSubscription.h */,
 				46569009132DA5FE004086EE /* DDCometSubscription.m */,
 				46569010132DDD17004086EE /* DDQueue.h */,
-				A382EE691AFB489E00A13202 /* DDLog.h */,
-				A382EE6A1AFB489E00A13202 /* DDLog.m */,
 			);
 			path = DDComet;
 			sourceTree = "<group>";
@@ -392,7 +387,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A382EE6B1AFB489E00A13202 /* DDLog.m in Sources */,
 				46568FA6132C01AD004086EE /* main.m in Sources */,
 				46568FA9132C01AD004086EE /* CometClientAppDelegate.m in Sources */,
 				46568FAF132C01AD004086EE /* MainViewController.m in Sources */,
